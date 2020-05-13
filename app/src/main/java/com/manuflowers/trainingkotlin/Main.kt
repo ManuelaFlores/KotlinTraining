@@ -58,4 +58,22 @@ fun main(arguments: Array<String>) {
     val areNamesDifferent = myName != strangerName
     println(areNamesDifferent)
 
+    // Any is type from which all other types in coding come out
+    // is an object which means that it has a special unique reference in memory since you create two separate instances
+    val firstObject = Any()
+    val secondObject = Any()
+
+    //To check if they point to the same reference or memory address we are going to use the triple equals operator
+    println(firstObject === secondObject)
+
+    //Triple equals operator has its counterpart
+    println(firstObject !== secondObject)
+
+    val isNameEmpty = myName.isEmpty()
+    println(isNameEmpty)
+
+    val password = "1234567890"
+    val isPasswordSecure = password.length >= 10
+    println(isPasswordSecure)
+    println(myName.length == strangerName.length)
 }
