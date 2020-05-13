@@ -1,6 +1,17 @@
 package com.manuflowers.trainingkotlin
 
-fun main() {
+/**
+ * This is a documentation-style comment
+ * You can reference things here, like the [main] function.
+ * You can also reference parameters, like the [arguments].
+ *
+ * @param arguments
+ * @author Manuela Flores
+ * */
+fun main(arguments: Array<String>) {
+    // Data types:
+    // When you want to declare a variable meaning that it's value can be changed, you use var
+    // If you don't want the value change you use val
     var myAge = 24
     val myName = "Manuela"
     val lastName = "Flores"
@@ -23,6 +34,6 @@ fun main() {
     val ageFromString = "35".toInt()
     println(ageFromString)
 
-    val nameLength =fullName.length
+    val nameLength = fullName.length
     println(nameLength)
 }
