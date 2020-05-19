@@ -32,6 +32,4 @@ fun main() {
 
     val yearOfBirth = lastBirthdayYear - myAgeNotNull
     println("I was born in $yearOfBirth")
-
-
 }
