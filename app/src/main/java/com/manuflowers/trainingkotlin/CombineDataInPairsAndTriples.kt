@@ -14,6 +14,25 @@ fun main() {
     val fullName = Pair<String, String>("Manuela", "Flores")
     println("My name is ${fullName.first} and my last name is ${fullName.second}")
 
-    //This way of calling values is destructuring:
+    /**
+     * The second way to access its values is called destructuring: There are a few coding structures
+     * which allow yo to split up the construct to all their internal values
+     * */
+    val (name, lastName) = fullName
+    println("My name is $name and my last name is $lastName")
 
+    val birthday = Triple(16, 2, 1996)
+    val person = Pair("Manuela Flores", birthday)
+
+    //Access the value by ordering:
+    val nameUsingOrdering = person.first
+    val birthDayUsingOrdering = person.second
+
+    //Access the values by destructuring
+    val (fullname, bday) = person
+    val (day, month, _) = birthday
+
+    println("$fullname  was born on $day/$month, year unknown!")
+    val yearOfBirth = birthday.third
+    println("$yearOfBirth")
 }
