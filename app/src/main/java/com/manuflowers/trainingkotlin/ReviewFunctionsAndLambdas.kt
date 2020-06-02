@@ -42,4 +42,19 @@ fun main() {
 
     val closedRange = createRange('A', 'G')
     printRange(closedRange)
+
+    fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
+        return operation(a, b)
+    }
+
+    val addLambda = { a: Int, b: Int ->
+        a + b
+    }
+
+    operateOnNumbers(2, 3) { a, b -> a + b }
+
+    fun addFunction(a: Int, b: Int) = a + b
+    operateOnNumbers(3, 6, Int::plus)
+
+
 }
