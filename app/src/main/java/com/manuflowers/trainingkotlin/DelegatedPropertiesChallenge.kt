@@ -1,5 +1,7 @@
 package com.manuflowers.trainingkotlin
 
+import kotlin.properties.Delegates
+
 /*
 Challenge 1:
  Rewrite the `IceCream` class below:
@@ -8,8 +10,11 @@ Challenge 1:
 */
 
 class IceCream {
-    val name: String
-    val ingredients: ArrayList<String>
+    var name: String = "Vanilla"
+
+    val ingredients: ArrayList<String> by lazy {
+        arrayListOf("milk", "some fruit")
+    }
 }
 
 /*
@@ -26,26 +31,34 @@ below with delegated property observer functionality:
 
 class SpaceCar(
     val make: String,
-    val color: String
+    val color: String,
+    var spaceBattery: SpaceBattery
 )
 
 class SpaceBattery {
-    var level = 0.0
+    var lowCharge = false
+    var level by Delegates.observable(100.0) { _, oldValue, newValue ->
+        lowCharge = newValue<= 10.0
+    }
 }
 
 fun main() {
     // ~~~Challenge 1~~~
     // Make a new instance of IceCream
-
+    val iceCream = IceCream()
     // Give it a name other than the default
-
+    iceCream.name = "Other name"
     // Add some ingredients!
-
+    iceCream.ingredients.add("Milky cream")
+    iceCream.ingredients.add("Peanuts")
+    println(iceCream.ingredients)
 
     // ~~~Challenge 2~~~
     // Make a SpaceCar!
-
+    val spaceCar = SpaceCar("TOYOTa", "RED", SpaceBattery())
     // Charge the battery!
+    spaceCar.spaceBattery.level = 59.0
+    println(spaceCar.spaceBattery.lowCharge)
 
     // Fly around for awhile.
 
