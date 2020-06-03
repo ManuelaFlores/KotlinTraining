@@ -14,16 +14,18 @@ class PersonFour(val name: String, val lastName: String) {
 class TV(var width: Double, var height: Double) {
     var diagonal: Int
         get() {
-            val result = sqrt(width * width + height * height)
-            return result.roundToInt()
+            return TVMath.getDiagonal(width, height)
         }
-    set(value) {
-        val ratioWidth = 16.0
-        val ratioHeight = 9
-        val ratioDiagonal = sqrt(ratioWidth* ratioWidth + ratioHeight* ratioHeight)
-        height = value.toDouble() * ratioHeight/ratioDiagonal
-        width = height * ratioWidth / ratioHeight
-    }
+        set(value) {
+            val size =
+                TVMath.getWidthAndHeight(
+                    diagonal = value,
+                    ratioWidth = 16.0,
+                    ratioHeight = 9.0
+                )
+            width = size.first
+            height = size.second
+        }
 }
 
 fun main() {
