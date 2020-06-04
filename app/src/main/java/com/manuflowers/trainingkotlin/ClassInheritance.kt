@@ -8,28 +8,43 @@ package com.manuflowers.trainingkotlin
  *
  * */
 
-data class Grade(val courseName: String, val letter: Char, val credits: Double)
+data class Grade(val courseName: String, val letter: Char, val credits: Double = 0.0)
 
 open class PersonFive(var firstName: String, var lastName: String) {
     fun fullName() = "$firstName $lastName"
 }
 
-open  class StudentTwo(
+open class StudentTwo(
     firstName: String, lastName: String,
     var grades: MutableList<Grade> = mutableListOf<Grade>()
 ) : PersonFive(firstName, lastName) {
 
-    fun recordGrade(grade: Grade) {
+    open var isEligible: Boolean = true
+
+    open fun recordGrade(grade: Grade) {
         grades.add(grade)
     }
 }
 
-class BandMember(firstName: String, lastName: String): StudentTwo(firstName, lastName) {
+class BandMember(firstName: String, lastName: String) : StudentTwo(firstName, lastName) {
     var minimumPractice: Int = 2
+    override var isEligible: Boolean = true
+        get() = grades.none { it.letter == 'F' }
+
+    override fun recordGrade(grade: Grade) {
+        super.recordGrade(grade)
+        if (!isEligible) println("No more performing for: $firstName! Study, study, study!")
+    }
+
 }
 
-class StudentAthlete(firstName: String, lastName: String): StudentTwo(firstName, lastName) {
-    var isEligible: Boolean = true
+class StudentAthlete(firstName: String, lastName: String) : StudentTwo(firstName, lastName) {
+
+    override fun recordGrade(grade: Grade) {
+        super.recordGrade(grade)
+        isEligible = grades.filter { it.letter == 'F' }.size < 3
+        if (!isEligible) println("Can't play the big game! Time to study")
+    }
 }
 
 fun main() {
@@ -47,4 +62,12 @@ fun main() {
     println(jon.fullName())
     println(jane.fullName())
     println(jane.grades)
+
+    val utterFailureGrade = Grade(courseName = "Being a regular Human", letter = 'F')
+    marty.recordGrade(utterFailureGrade)
+    marty.recordGrade(utterFailureGrade)
+    marty.recordGrade(utterFailureGrade)
+    println("Can ${marty.fullName()} play in the big game: ${marty.isEligible}")
+
+    victor.recordGrade(utterFailureGrade)
 }
